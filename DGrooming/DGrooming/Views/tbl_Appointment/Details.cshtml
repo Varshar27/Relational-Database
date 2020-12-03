@@ -1,0 +1,58 @@
+﻿@model DGrooming.Models.tbl_Appointment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_Appointment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppointmentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AppointmentTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppointmentTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cancelled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cancelled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cancelled_Reason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cancelled_Reason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Dog.OwnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Dog.OwnerID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AppointmentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

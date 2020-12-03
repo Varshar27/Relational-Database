@@ -1,0 +1,50 @@
+﻿@model DGrooming.Models.tbl_ServiceRendered
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_ServiceRendered</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceExtendedPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceExtendedPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Appointment.DogID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Appointment.DogID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Employee.Firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Employee.Firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_GroomingServices.ServiceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_GroomingServices.ServiceName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LineItemNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DGroomingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_Appointment">
+    <Key>
+      <PropertyRef Name="AppointmentID" />
+    </Key>
+    <Property Name="AppointmentID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AppointmentDate" Type="DateTime" Precision="0" />
+    <Property Name="AppointmentTime" Type="Time" Precision="7" />
+    <Property Name="DogID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cancelled" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cancelled_Reason" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_Dog" Relationship="Self.FK__tbl_Appoi__DogID__3D5E1FD2" FromRole="tbl_Appointment" ToRole="tbl_Dog" />
+    <NavigationProperty Name="tbl_ServiceRendered" Relationship="Self.FK__tbl_Servi__Appoi__440B1D61" FromRole="tbl_Appointment" ToRole="tbl_ServiceRendered" />
+  </EntityType>
+  <EntityType Name="tbl_Dog">
+    <Key>
+      <PropertyRef Name="DogID" />
+    </Key>
+    <Property Name="DogID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OwnerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dogname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Breed" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Matted_dog" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_Appointment" Relationship="Self.FK__tbl_Appoi__DogID__3D5E1FD2" FromRole="tbl_Dog" ToRole="tbl_Appointment" />
+    <NavigationProperty Name="tbl_Owner" Relationship="Self.FK__tbl_Dog__OwnerID__3A81B327" FromRole="tbl_Dog" ToRole="tbl_Owner" />
+  </EntityType>
+  <EntityType Name="tbl_Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_ServiceRendered" Relationship="Self.FK__tbl_Servi__Emplo__44FF419A" FromRole="tbl_Employee" ToRole="tbl_ServiceRendered" />
+  </EntityType>
+  <EntityType Name="tbl_GroomingServices">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ServiceName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ServiceDuration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ServicePrice" Type="Single" Nullable="false" />
+    <NavigationProperty Name="tbl_ServiceRendered" Relationship="Self.fk_ServiceID" FromRole="tbl_GroomingServices" ToRole="tbl_ServiceRendered" />
+  </EntityType>
+  <EntityType Name="tbl_Owner">
+    <Key>
+      <PropertyRef Name="OwnerID" />
+    </Key>
+    <Property Name="OwnerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone_Number" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Owner_Reviews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Dog" Relationship="Self.FK__tbl_Dog__OwnerID__3A81B327" FromRole="tbl_Owner" ToRole="tbl_Dog" />
+  </EntityType>
+  <EntityType Name="tbl_ServiceRendered">
+    <Key>
+      <PropertyRef Name="LineItemNumber" />
+    </Key>
+    <Property Name="AppointmentID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LineItemNumber" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ServiceExtendedPrice" Type="Single" Nullable="false" />
+    <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_Appointment" Relationship="Self.FK__tbl_Servi__Appoi__440B1D61" FromRole="tbl_ServiceRendered" ToRole="tbl_Appointment" />
+    <NavigationProperty Name="tbl_Employee" Relationship="Self.FK__tbl_Servi__Emplo__44FF419A" FromRole="tbl_ServiceRendered" ToRole="tbl_Employee" />
+    <NavigationProperty Name="tbl_GroomingServices" Relationship="Self.fk_ServiceID" FromRole="tbl_ServiceRendered" ToRole="tbl_GroomingServices" />
+  </EntityType>
+  <EntityType Name="Appointmentdetail">
+    <Key>
+      <PropertyRef Name="Dogname" />
+    </Key>
+    <Property Name="Appointmentdate" Type="DateTime" Precision="0" />
+    <Property Name="AppointmentTime" Type="Time" Precision="7" />
+    <Property Name="Dogname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tbl_Appoi__DogID__3D5E1FD2">
+    <End Role="tbl_Dog" Type="Self.tbl_Dog" Multiplicity="0..1" />
+    <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Dog">
+        <PropertyRef Name="DogID" />
+      </Principal>
+      <Dependent Role="tbl_Appointment">
+        <PropertyRef Name="DogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Servi__Appoi__440B1D61">
+    <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="1" />
+    <End Role="tbl_ServiceRendered" Type="Self.tbl_ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Appointment">
+        <PropertyRef Name="AppointmentID" />
+      </Principal>
+      <Dependent Role="tbl_ServiceRendered">
+        <PropertyRef Name="AppointmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Dog__OwnerID__3A81B327">
+    <End Role="tbl_Owner" Type="Self.tbl_Owner" Multiplicity="0..1" />
+    <End Role="tbl_Dog" Type="Self.tbl_Dog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Owner">
+        <PropertyRef Name="OwnerID" />
+      </Principal>
+      <Dependent Role="tbl_Dog">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Servi__Emplo__44FF419A">
+    <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="0..1" />
+    <End Role="tbl_ServiceRendered" Type="Self.tbl_ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="tbl_ServiceRendered">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ServiceID">
+    <End Role="tbl_GroomingServices" Type="Self.tbl_GroomingServices" Multiplicity="1" />
+    <End Role="tbl_ServiceRendered" Type="Self.tbl_ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_GroomingServices">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="tbl_ServiceRendered">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DGroomingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tbl_Appointment" EntityType="Self.tbl_Appointment" />
+    <EntitySet Name="tbl_Dog" EntityType="Self.tbl_Dog" />
+    <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" />
+    <EntitySet Name="tbl_GroomingServices" EntityType="Self.tbl_GroomingServices" />
+    <EntitySet Name="tbl_Owner" EntityType="Self.tbl_Owner" />
+    <EntitySet Name="tbl_ServiceRendered" EntityType="Self.tbl_ServiceRendered" />
+    <EntitySet Name="Appointmentdetails" EntityType="Self.Appointmentdetail" />
+    <AssociationSet Name="FK__tbl_Appoi__DogID__3D5E1FD2" Association="Self.FK__tbl_Appoi__DogID__3D5E1FD2">
+      <End Role="tbl_Dog" EntitySet="tbl_Dog" />
+      <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Servi__Appoi__440B1D61" Association="Self.FK__tbl_Servi__Appoi__440B1D61">
+      <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+      <End Role="tbl_ServiceRendered" EntitySet="tbl_ServiceRendered" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Dog__OwnerID__3A81B327" Association="Self.FK__tbl_Dog__OwnerID__3A81B327">
+      <End Role="tbl_Owner" EntitySet="tbl_Owner" />
+      <End Role="tbl_Dog" EntitySet="tbl_Dog" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Servi__Emplo__44FF419A" Association="Self.FK__tbl_Servi__Emplo__44FF419A">
+      <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+      <End Role="tbl_ServiceRendered" EntitySet="tbl_ServiceRendered" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ServiceID" Association="Self.fk_ServiceID">
+      <End Role="tbl_GroomingServices" EntitySet="tbl_GroomingServices" />
+      <End Role="tbl_ServiceRendered" EntitySet="tbl_ServiceRendered" />
+    </AssociationSet>
+    <FunctionImport Name="changeOwnerphonenumber">
+      <Parameter Name="Phone_Number" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DogServicetable" ReturnType="Collection(DGroomingModel.DogServicetable_Result)" />
+    <FunctionImport Name="getDOGandOWNERDetails" ReturnType="Collection(DGroomingModel.getDOGandOWNERDetails_Result)" />
+    <FunctionImport Name="Matteddogs" ReturnType="Collection(DGroomingModel.Matteddogs_Result)">
+      <Parameter Name="Matted_dog" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DGroomingModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DGroomingModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="TotalAmount" ReturnType="Collection(Double)" />
+  </EntityContainer>
+  <ComplexType Name="DogServicetable_Result">
+    <Property Type="String" Name="Ownername" Nullable="false" MaxLength="101" />
+    <Property Type="String" Name="Dogname" Nullable="true" MaxLength="100" />
+    <Property Type="Time" Name="AppointmentTime" Nullable="true" />
+    <Property Type="DateTime" Name="Appointmentdate" Nullable="true" />
+    <Property Type="String" Name="Cancelled" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Cancelled_Reason" Nullable="true" MaxLength="255" />
+    <Property Type="Single" Name="serviceExtendedprice" Nullable="true" />
+    <Property Type="String" Name="Employeename" Nullable="true" MaxLength="101" />
+    <Property Type="String" Name="servicename" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="getDOGandOWNERDetails_Result">
+    <Property Type="String" Name="OwnerID" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DogID" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Dogname" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Owner_Reviews" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="Matteddogs_Result">
+    <Property Type="String" Name="DogID" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="OwnerID" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Dogname" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Gender" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Breed" Nullable="false" MaxLength="250" />
+    <Property Type="DateTime" Name="DOB" Nullable="false" />
+    <Property Type="String" Name="Age" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Matted_dog" Nullable="false" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

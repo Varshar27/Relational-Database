@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9a5705be8d4647f6868352cbd761842b" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="DGroomingModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGroomingModel.tbl_Appointment" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGroomingModel.tbl_Dog" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGroomingModel.tbl_Employee" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGroomingModel.tbl_GroomingServices" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGroomingModel.tbl_Owner" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGroomingModel.tbl_ServiceRendered" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DGroomingModel.Appointmentdetail" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="DGroomingModel.FK__tbl_Appoi__DogID__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="DGroomingModel.FK__tbl_Servi__Appoi__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="DGroomingModel.FK__tbl_Dog__OwnerID__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="DGroomingModel.FK__tbl_Servi__Emplo__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="DGroomingModel.fk_ServiceID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

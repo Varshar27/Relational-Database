@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DGroomingModelStoreContainer" CdmEntityContainer="DGroomingEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DGroomingModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Appointment">
+      <EntityTypeMapping TypeName="DGroomingModel.tbl_Appointment">
+        <MappingFragment StoreEntitySet="tbl_Appointment">
+          <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+          <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+          <ScalarProperty Name="AppointmentTime" ColumnName="AppointmentTime" />
+          <ScalarProperty Name="DogID" ColumnName="DogID" />
+          <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+          <ScalarProperty Name="Cancelled_Reason" ColumnName="Cancelled_Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Dog">
+      <EntityTypeMapping TypeName="DGroomingModel.tbl_Dog">
+        <MappingFragment StoreEntitySet="tbl_Dog">
+          <ScalarProperty Name="DogID" ColumnName="DogID" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Dogname" ColumnName="Dogname" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Breed" ColumnName="Breed" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Matted_dog" ColumnName="Matted_dog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Employee">
+      <EntityTypeMapping TypeName="DGroomingModel.tbl_Employee">
+        <MappingFragment StoreEntitySet="tbl_Employee">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_GroomingServices">
+      <EntityTypeMapping TypeName="DGroomingModel.tbl_GroomingServices">
+        <MappingFragment StoreEntitySet="tbl_GroomingServices">
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="ServiceDuration" ColumnName="ServiceDuration" />
+          <ScalarProperty Name="ServicePrice" ColumnName="ServicePrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Owner">
+      <EntityTypeMapping TypeName="DGroomingModel.tbl_Owner">
+        <MappingFragment StoreEntitySet="tbl_Owner">
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Owner_Reviews" ColumnName="Owner_Reviews" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ServiceRendered">
+      <EntityTypeMapping TypeName="DGroomingModel.tbl_ServiceRendered">
+        <MappingFragment StoreEntitySet="tbl_ServiceRendered">
+          <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+          <ScalarProperty Name="LineItemNumber" ColumnName="LineItemNumber" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="ServiceExtendedPrice" ColumnName="ServiceExtendedPrice" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appointmentdetails">
+      <EntityTypeMapping TypeName="DGroomingModel.Appointmentdetail">
+        <MappingFragment StoreEntitySet="Appointmentdetails">
+          <ScalarProperty Name="Appointmentdate" ColumnName="Appointmentdate" />
+          <ScalarProperty Name="AppointmentTime" ColumnName="AppointmentTime" />
+          <ScalarProperty Name="Dogname" ColumnName="Dogname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="changeOwnerphonenumber" FunctionName="DGroomingModel.Store.changeOwnerphonenumber" />
+    <FunctionImportMapping FunctionImportName="DogServicetable" FunctionName="DGroomingModel.Store.DogServicetable">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DGroomingModel.DogServicetable_Result">
+          <ScalarProperty Name="Ownername" ColumnName="Ownername" />
+          <ScalarProperty Name="Dogname" ColumnName="Dogname" />
+          <ScalarProperty Name="AppointmentTime" ColumnName="AppointmentTime" />
+          <ScalarProperty Name="Appointmentdate" ColumnName="Appointmentdate" />
+          <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+          <ScalarProperty Name="Cancelled_Reason" ColumnName="Cancelled_Reason" />
+          <ScalarProperty Name="serviceExtendedprice" ColumnName="serviceExtendedprice" />
+          <ScalarProperty Name="Employeename" ColumnName="Employeename" />
+          <ScalarProperty Name="servicename" ColumnName="servicename" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getDOGandOWNERDetails" FunctionName="DGroomingModel.Store.getDOGandOWNERDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DGroomingModel.getDOGandOWNERDetails_Result">
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DogID" ColumnName="DogID" />
+          <ScalarProperty Name="Dogname" ColumnName="Dogname" />
+          <ScalarProperty Name="Owner_Reviews" ColumnName="Owner_Reviews" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Matteddogs" FunctionName="DGroomingModel.Store.Matteddogs">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DGroomingModel.Matteddogs_Result">
+          <ScalarProperty Name="DogID" ColumnName="DogID" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Dogname" ColumnName="Dogname" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Breed" ColumnName="Breed" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Matted_dog" ColumnName="Matted_dog" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DGroomingModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DGroomingModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DGroomingModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DGroomingModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DGroomingModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DGroomingModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DGroomingModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DGroomingModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DGroomingModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="TotalAmount" FunctionName="DGroomingModel.Store.TotalAmount" />
+  </EntityContainerMapping>
+</Mapping>

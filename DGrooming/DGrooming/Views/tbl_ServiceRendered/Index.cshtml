@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DGrooming.Models.tbl_ServiceRendered>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceExtendedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_Appointment.DogID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_Employee.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_GroomingServices.ServiceName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceExtendedPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_Appointment.DogID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_Employee.Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_GroomingServices.ServiceName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LineItemNumber }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LineItemNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LineItemNumber })
+        </td>
+    </tr>
+}
+
+</table>

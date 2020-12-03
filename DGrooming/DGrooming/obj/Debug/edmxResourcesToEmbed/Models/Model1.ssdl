@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DGroomingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Appointment">
+    <Key>
+      <PropertyRef Name="AppointmentID" />
+    </Key>
+    <Property Name="AppointmentID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AppointmentDate" Type="date" />
+    <Property Name="AppointmentTime" Type="time" Precision="7" />
+    <Property Name="DogID" Type="varchar" MaxLength="50" />
+    <Property Name="Cancelled" Type="varchar" MaxLength="50" />
+    <Property Name="Cancelled_Reason" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tbl_Dog">
+    <Key>
+      <PropertyRef Name="DogID" />
+    </Key>
+    <Property Name="DogID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="OwnerID" Type="varchar" MaxLength="50" />
+    <Property Name="Dogname" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Breed" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Age" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Matted_dog" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_GroomingServices">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ServiceName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ServiceDuration" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ServicePrice" Type="real" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Owner">
+    <Key>
+      <PropertyRef Name="OwnerID" />
+    </Key>
+    <Property Name="OwnerID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email_Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone_Number" Type="int" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="Owner_Reviews" Type="xml" />
+  </EntityType>
+  <EntityType Name="tbl_ServiceRendered">
+    <Key>
+      <PropertyRef Name="LineItemNumber" />
+    </Key>
+    <Property Name="AppointmentID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LineItemNumber" Type="int" Nullable="false" />
+    <Property Name="ServiceID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ServiceExtendedPrice" Type="real" Nullable="false" />
+    <Property Name="EmployeeID" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DGrooming .dbo.Appointmentdetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Appointmentdetails">
+    <Key>
+      <PropertyRef Name="Dogname" />
+    </Key>
+    <Property Name="Appointmentdate" Type="date" />
+    <Property Name="AppointmentTime" Type="time" Precision="7" />
+    <Property Name="Dogname" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tbl_Appoi__DogID__3D5E1FD2">
+    <End Role="tbl_Dog" Type="Self.tbl_Dog" Multiplicity="0..1" />
+    <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Dog">
+        <PropertyRef Name="DogID" />
+      </Principal>
+      <Dependent Role="tbl_Appointment">
+        <PropertyRef Name="DogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Dog__OwnerID__3A81B327">
+    <End Role="tbl_Owner" Type="Self.tbl_Owner" Multiplicity="0..1" />
+    <End Role="tbl_Dog" Type="Self.tbl_Dog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Owner">
+        <PropertyRef Name="OwnerID" />
+      </Principal>
+      <Dependent Role="tbl_Dog">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Servi__Appoi__440B1D61">
+    <End Role="tbl_Appointment" Type="Self.tbl_Appointment" Multiplicity="1" />
+    <End Role="tbl_ServiceRendered" Type="Self.tbl_ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Appointment">
+        <PropertyRef Name="AppointmentID" />
+      </Principal>
+      <Dependent Role="tbl_ServiceRendered">
+        <PropertyRef Name="AppointmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Servi__Emplo__44FF419A">
+    <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="0..1" />
+    <End Role="tbl_ServiceRendered" Type="Self.tbl_ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="tbl_ServiceRendered">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ServiceID">
+    <End Role="tbl_GroomingServices" Type="Self.tbl_GroomingServices" Multiplicity="1" />
+    <End Role="tbl_ServiceRendered" Type="Self.tbl_ServiceRendered" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_GroomingServices">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="tbl_ServiceRendered">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="changeOwnerphonenumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Phone_Number" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DogServicetable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="getDOGandOWNERDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Matteddogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Matted_dog" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TotalAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="DGroomingModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Appointment" EntityType="Self.tbl_Appointment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Dog" EntityType="Self.tbl_Dog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_GroomingServices" EntityType="Self.tbl_GroomingServices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Owner" EntityType="Self.tbl_Owner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_ServiceRendered" EntityType="Self.tbl_ServiceRendered" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Appointmentdetails" EntityType="Self.Appointmentdetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Appointmentdetails].[Appointmentdate] AS [Appointmentdate], 
+    [Appointmentdetails].[AppointmentTime] AS [AppointmentTime], 
+    [Appointmentdetails].[Dogname] AS [Dogname]
+    FROM [dbo].[Appointmentdetails] AS [Appointmentdetails]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__tbl_Appoi__DogID__3D5E1FD2" Association="Self.FK__tbl_Appoi__DogID__3D5E1FD2">
+      <End Role="tbl_Dog" EntitySet="tbl_Dog" />
+      <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Dog__OwnerID__3A81B327" Association="Self.FK__tbl_Dog__OwnerID__3A81B327">
+      <End Role="tbl_Owner" EntitySet="tbl_Owner" />
+      <End Role="tbl_Dog" EntitySet="tbl_Dog" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Servi__Appoi__440B1D61" Association="Self.FK__tbl_Servi__Appoi__440B1D61">
+      <End Role="tbl_Appointment" EntitySet="tbl_Appointment" />
+      <End Role="tbl_ServiceRendered" EntitySet="tbl_ServiceRendered" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Servi__Emplo__44FF419A" Association="Self.FK__tbl_Servi__Emplo__44FF419A">
+      <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+      <End Role="tbl_ServiceRendered" EntitySet="tbl_ServiceRendered" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ServiceID" Association="Self.fk_ServiceID">
+      <End Role="tbl_GroomingServices" EntitySet="tbl_GroomingServices" />
+      <End Role="tbl_ServiceRendered" EntitySet="tbl_ServiceRendered" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
